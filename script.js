@@ -5,23 +5,19 @@ const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
-// let apiQoutes = [];
-
-// Show loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide loading
-function complete() {
+function removeLoadingSpinner() {
     quoteContainer.hidden = false;
     loader.hidden = true;
 }
 
 // Show new quote
 function newQuote() {
-    loading();
+    showLoadingSpinner();
     // Pick a random quote from apiQoutes array
     const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
     // Check if Author field is blank and replace it with 'Unknown'
@@ -38,20 +34,8 @@ function newQuote() {
     }
     // Set quote, hide loader
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 }
-
-// Get quotes from API
-// async function getQuotes() {
-//     const apiUrl = 'https://type.fit/api/quotes';
-//     try {
-//         const response = await fetch(apiUrl);
-//         apiQoutes = await response.json();
-//         newQuote();
-//     } catch (error) {
-//         // Catch error here
-//     }
-// }
 
 // Tweet Quote
 function tweetQuote() {
@@ -64,5 +48,4 @@ newQuoteBtn.addEventListener('click', newQuote);
 twitterBtn.addEventListener('click', tweetQuote);
 
 // On load
-// getQuotes();
 newQuote();
